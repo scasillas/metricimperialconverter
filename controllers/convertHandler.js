@@ -1,14 +1,6 @@
-/*
-*
-*
-*       Complete the handler logic below
-*       
-*       
-*/
-
 function ConvertHandler() {
   
-  let regex = /([A-Za-z]+)/;
+  let regex = /([A-Za-z]+)/; // parenthesis enable inclusion of the separator in an array item
   
   this.getNum = (input) => {
     let result = input.split(regex)[0];
@@ -59,23 +51,77 @@ function ConvertHandler() {
       break;
     default:
       result = "invalid unit";
-  }
+}
+    
     return result;
   };
-  
- 
-  
-  this.convert = function(initNum, initUnit) {
-    const galToL = 3.78541;
-    const lbsToKg = 0.453592;
-    const miToKm = 1.60934;
-    var result;
+
+  this.spellOutUnit = (unit) => {
+    let result;
+    
+    switch(unit) {
+      case "gal":
+        result = "gallons";
+        break;
+      case "l":
+        result = "liters";
+        break;
+      case "lbs":
+        result = "pounds";
+        break;
+      case "kg":
+        result = "kilograms";
+        break;
+      case "mi":
+        result = "miles";
+        break;
+      case "km":
+        result = "kilometers";
+        break;
+      default:
+        result = "invalid unit";
+  }
     
     return result;
   };
   
-  this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    var result;
+  this.convert = (initNum, initUnit) => {
+    const galToL = 3.78541;
+    const lbsToKg = 0.453592;
+    const miToKm = 1.60934;
+    let result;
+    
+    console.log("initNum: ", initNum);
+    switch(initUnit) {
+      case "gal":
+        result = eval(initNum) * galToL;
+        break;
+      case "l":
+        result = eval(initNum) / galToL;
+        break;
+      case "lbs":
+        result = eval(initNum) * lbsToKg;
+        break;
+      case "kg":
+        result = eval(initNum) / lbsToKg;
+        break;
+      case "mi":
+        result = eval(initNum) * miToKm;
+        break;
+      case "km":
+        result = eval(initNum) / miToKm;
+        break;
+      default:
+        result = "invalid unit";
+    }
+    console.log("convert: ", result);
+    return result;
+  };
+  
+  this.getString = (initNum, initUnit, returnNum, returnUnit) => {
+    let result;
+    
+    result = initNum + " " + this.spellOutUnit(initUnit) + " converts to " + +returnNum.toFixed(5) + " " + this.spellOutUnit(returnUnit);
     
     return result;
   };
@@ -83,3 +129,4 @@ function ConvertHandler() {
 }
 
 module.exports = ConvertHandler;
+
