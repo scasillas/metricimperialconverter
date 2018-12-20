@@ -63,7 +63,7 @@ function ConvertHandler() {
     return result;
   };
   
-  
+ 
   
   this.convert = function(initNum, initUnit) {
     const galToL = 3.78541;
